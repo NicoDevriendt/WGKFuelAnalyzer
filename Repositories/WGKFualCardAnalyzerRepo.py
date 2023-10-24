@@ -2,6 +2,7 @@ import sqlite3
 import pandas as pd
 
 from Utils import configer 
+from Models.transactie import Transactie
 
 # Deze functie bepaalt de database file via de .config file
 # en maakt vervolgens een connectie met de database.
@@ -115,7 +116,7 @@ def updateOneTransactionByCardId(datum,tijd,cardId,kilometerstand):
     dbconnectie.commit;
 
 # CSV data wegschrijven in de database
-# Params: data: List
+# Params: object: Transactie
 def InsertCsvRecordToDB(objTankKaart):
     with __createDBConnection() as dbconnectie:
         datum_transactie = objTankKaart.get_Datum()

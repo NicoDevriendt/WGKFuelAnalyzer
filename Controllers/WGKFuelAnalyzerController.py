@@ -4,7 +4,7 @@ import shutil
 
 from Repositories import WGKFualCardAnalyzerRepo as repo
 from Utils import configer 
-from Models.tankkaart import Tankkaart
+from Models.transactie import Transactie
 
 # Archiveren van een file naar de archive folder bepaald volgens de .config file.
 # Params: folder: String Locatie van de file die men wenst te archiveren.
@@ -115,7 +115,7 @@ def __createTransactionObject(data):
     korting_l = 0.00 if data[25] == "" else float(data[25].replace(',','.'))
     btwTarief = 0.00 if data[31] == "" else float(data[31].replace(',','.'))
 
-    return Tankkaart(datum_transactie, tijd_transactie, kaartnummer, adres, landcode, afdeling, autoId, kilometerstand, product, aantal_liter, off_prijs_l, korting_l, btwTarief)
+    return Transactie(datum_transactie, tijd_transactie, kaartnummer, adres, landcode, afdeling, autoId, kilometerstand, product, aantal_liter, off_prijs_l, korting_l, btwTarief)
     
 if __name__ == '__main__':
     pass
