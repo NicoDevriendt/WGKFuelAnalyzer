@@ -25,6 +25,7 @@ def startup():
                 5. Kostprijsevolutie \n
                 6. Km stand opvragen \n
                 7. Km stand wijzigen \n
+                8. Statistische gegevens \n
                 99. Stoppen \n 
                 Uw keuze: """)
             if answer == "1":
@@ -41,6 +42,8 @@ def startup():
                 getKilometerstand()
             elif answer == "7":
                 updateKilometerstand()
+            elif answer == "8":
+                statistischeGegevens()
             elif answer == "99":
                 pass
             else:
@@ -223,6 +226,41 @@ def updateKilometerstand():
         nieuwe_km = input("Wat is de nieuwe km stand ? :")
         transaction = repo.updateOneTransactionByCardId(transaction[0] ,transaction[1],transaction[2],int(nieuwe_km))
         print("Kilometerstand werd gewijzigd")
+        __pressKeyToContinue()
+
+# Deze functie geeft een aantal statisieken terug op de transacties die uitgevoerd zijn binnen een 
+# gegeven kalender jaar.
+def statistischeGegevens():
+    jaar = input("Geef het jaar in:")
+    transactions = repo.fetchDfTransactionsForYear(jaar)
+
+    if transactions.size != 0:
+        transactions = transactions.rename(columns={"officiële_prijs_liter": "Officiële Prijs / L","korting_liter": "Korting / L","aantal_liter": "Aantal Liter"})
+        transactions.loc[transactions["afdeling"] == "", "afdeling"] = "Niet Toegewezen"
+        transactions['Totaal'] =  (transactions['Officiële Prijs / L'] - transactions['Korting / L']) * transactions['Aantal Liter']
+        transactions
+        os.system('cls')
+        print("Statistiek 1/4 Officiële prijzen in EUR")
+        print()
+        print(transactions.groupby('afdeling')['Officiële Prijs / L'].describe())
+        __pressKeyToContinue()
+        os.system('cls')
+        print("Statistiek 2/4 Kortingen in EUR")
+        print()
+        print(transactions.groupby('afdeling')['Korting / L'].describe())
+        __pressKeyToContinue()
+        os.system('cls')
+        print("Statistiek 3/4 Aantal liter per tankbeurt")
+        print()
+        print(transactions.groupby('afdeling')['Aantal Liter'].describe())
+        __pressKeyToContinue()
+        os.system('cls')
+        print("Statistiek 4/4 Kostprijs Tankbeurt in EUR")
+        print()
+        print(transactions.groupby('afdeling')['Totaal'].describe())
+        __pressKeyToContinue()
+    else:
+        print(f"Er zijn geen transacties gevonden voor het jaar { jaar }")
         __pressKeyToContinue()
 
 # Helper functie om array om te zetten naar een numpy array & dimensies omkeren

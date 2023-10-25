@@ -162,6 +162,19 @@ def __getSQLNotAllowedTransactions(begindatum, einddatum):
 
     return (query,parameters)
 
+# Ophalen van alle transacties in een dataframe van een kalenderjaar.
+# Params jaar: Integer
+# Return dataframe
+def fetchDfTransactionsForYear(jaar):
+    with __createDBConnection() as dbconnectie:
+        query = """
+        select afdeling, officiële_prijs_liter, korting_liter,aantal_liter
+        from transacties where substr(datum,7,4) = ?
+        """
+        parameters = (jaar,)
+        transacties = pd.read_sql_query(query,dbconnectie, params=parameters)
+    return transacties
+
 # Conversie van een getal waarde zodat deze uit twee posities bestaat
 # wordt gebruikt om dag en maand te converteren naar 01,02,...
 # Params: waarde: String

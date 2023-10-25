@@ -110,7 +110,7 @@ def __createTransactionObject(data):
     autoId = data[14]
     kilometerstand = int(data[16])
     product = data[19]
-    aantal_liter = 0.00 if data[20] == "" else float(data[20].replace(',','.'))
+    aantal_liter = abs(0.00 if data[20] == "" else float(data[20].replace(',','.')))
     off_prijs_l = 0.00 if data[24] == "" else float(data[24].replace(',','.'))
     korting_l = 0.00 if data[25] == "" else float(data[25].replace(',','.'))
     btwTarief = 0.00 if data[31] == "" else float(data[31].replace(',','.'))
