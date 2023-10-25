@@ -1,14 +1,20 @@
 # WGKFuelAnalyzer
-Analyseren van het gebruik van tankkaarten
+Algemeen:
+Onderwerp:Analyseren van het gebruik van tankkaarten
+Beschrijving onderwerp:
 Binnen het Wit Gele Kruis heeft elke medewerker met een dienstwagen / bedrijfswagen &
 een tankkaart ter beschikking.
 Periodiek krijgt de organisatie een overzicht van de uitgevoerde tankbeurten.
 Deze lijsten worden in een CSV bestand aangeleverd, die verwerkt moeten worden 
 & waarop men enkele overzichten wenst te maken.
 
-Het opstarten van de applicatie gebeurt via het commando
+Installation Requirements:
+Python versie >= 3.8
+
+Startup commando:
 python WGKFuelCardAnalyzer.py
 
+Configuration file:
 Het bestand met de instellingen moet in de root folder komen van de applicatie 
 en moet volgende naam hebben: WGKFuelAnalyzer.config
 
@@ -27,7 +33,7 @@ EXPORT_FOLDER = Folder waarin de gevraagde exports van overzichten (Excel) in te
 
 Belangrijk: Geef je enkel een naam van een folder, worden deze folders aangemaakt in je huidige directory.
 
-Beschrijving programma:
+Handleiding:
 
 Vervolgens komt men in een menu structuur terecht waaraan de gebruiker wordt
 gevraagd welke actie men wenst uit te voeren
@@ -71,4 +77,5 @@ In de databank is er slechts één bestand aanwezig nl bestand met de transactie
 Omwille van de GDPR wetgeving heb ik het bestand die de koppeling met de medewerkers
 via cardId & bestand die de koppeling met de wagens via autoId niet kunnen gebruiken
 voor deze opdracht.
+
 
