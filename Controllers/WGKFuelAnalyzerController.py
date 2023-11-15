@@ -42,7 +42,7 @@ def verwerkTransactieFile(folder,file):
     fullPathOfFile = os.path.join(folder,file)
     try:
         # Open de csv file
-        with open(fullPathOfFile,'r') as myTransactionFile:
+        with open(fullPathOfFile,'r',encoding="utf-8") as myTransactionFile:
             # Maak een csv reader.
             csvReader = csv.reader(myTransactionFile, delimiter=';')
             try:
